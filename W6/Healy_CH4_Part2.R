@@ -80,7 +80,7 @@ p + geom_bar(mapping = aes(y = ..prop..))
 p + geom_bar(mapping = aes(y = ..prop.., group = 1)) 
 
 # table() will list the frequencies for all values of a factor
-
+table(gss_sm$bigregion)
 table(gss_sm$religion)
 
 # Use geom_bar() again, but specify x & color = religion in ggplot()
@@ -136,7 +136,7 @@ p + geom_bar(position = "dodge",
              mapping = aes(y = ..prop.., 
                            group = religion)) 
 
-p1 + geom_bar(position = "dodge",
+p0 + geom_bar(position = "dodge",
              mapping = aes(y = ..prop.., 
                            group = bigregion)) 
 
@@ -149,6 +149,7 @@ p + geom_bar(position = "dodge",
              mapping = aes(y = ..prop.., 
                            group = bigregion)) +
   facet_wrap(~bigregion, ncol =1)
+
 
 p + geom_bar(position = "dodge",
              mapping = aes(y = ..prop.., 
@@ -246,7 +247,7 @@ p + geom_line(stat = "density")
 
 # ..scaled..: proportional density estimate. 
 p <- ggplot(data = subset(midwest, subset = state %in% oh_wi), 
-            mapping = aes(x = area, fill = state, color = state))
+            mapping = aes(x = percollege, fill = state, color = state))
 p + geom_density(alpha = 0.3, mapping = (aes(y = ..scaled..)))
 
 
