@@ -36,19 +36,47 @@ p + geom_point() + geom_text(mapping = aes(label = country), vjust = 1)
 # For the summarized *gss_sm* dataset grouped by only *padeg*, laebl the mean of children and siblings based on the paternal degree.
 # ========================== Answer part b =====================
 
+gss_sm
+by_padeg <- gss_sm %>% group_by(padeg) %>%
+  summarize(childs_mean= mean(childs, na.rm = TRUE),
+            sibs_mean = mean(sibs, na.rm = TRUE))
 
+by_padeg
 
-
+library(ggrepel)      
+p <- ggplot(data = by_padeg,
+            mapping = aes(x = childs_mean, y = sibs_mean, label = padeg))
+p + geom_point()  + geom_text_repel()
 
 
 ## Part 3) 
 # Question: For the by-country dataframe, choose observations from the united state of america (ccdoe=USA) after 1998, and then highlight them in the plot of road fatalities average against the average percentage of donors. 
 # ========================== Answer part c =====================
 
+organdata$ind <- organdata$ccode %in% c("USA") &
+  organdata$year > 1998
+
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors, color = ind))
+p + geom_point() +
+  geom_text_repel(data = subset(organdata, ind),
+                  mapping = aes(label = ccode)) +
+  guides(color = "none")   # Remove some guides
 
 
 
 ## Part 4)
 # Using gapminder dataset, specify the outliers in the plot of gdpPercap over lifeExp. 
 # ========================== Answer part d =====================
+gapminder <- gapminder
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp))
+p + geom_point() +
+  annotate(geom = "rect", xmin = 58000, xmax = 115000,
+           ymin = 55, ymax = 70, fill = "red", alpha = 0.2) + 
+  annotate(geom = "text", x = 58000, y = 72,
+           label = "A surprisingly high GDP per capita.", hjust = 0)      
+
 
