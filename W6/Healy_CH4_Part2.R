@@ -298,3 +298,4 @@ p + geom_bar(position = "dodge", stat = "identity") + theme(legend.position = "t
                    average life expectancies, 1960-2015",
        caption = "Data: OECD. After a chart by Christopher Ingraham,
                   Washington Post, December 27th 2017.")
+
