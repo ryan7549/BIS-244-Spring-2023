@@ -1,6 +1,6 @@
 ## BIS 244 Chapter 8
 
-library(gapminder)
+library(gapminder)a
 library(tidyverse)
 library(ggrepel)
 library(socviz)

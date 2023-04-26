@@ -64,9 +64,10 @@ p4 + theme_minimal() + theme(legend.position="top")
 # ====================== hands-on 1 starts =================
 
 # theme_classic(): A classic-looking theme, with x and y axis lines and no gridlines. 
+p4 + theme_classic() + theme(legend.position="top") 
 
 # theme_void(): A completely empty theme.
-
+p4 + theme_void() + theme(legend.position="top") 
 # ====================== hands-on 1 ends ====================
 
 ## 8.3 Change the Appearance of Plots with Themes
@@ -135,6 +136,8 @@ p4 + theme(legend.position = "top",
 # font type of the title = serif  
 # Font face of the title= italic ("plain", "italic", "bold", "bold.italic") 
 
+
+
 # Color, size, font type, and color of x axis
 # Color of x axis = orange, 
 # size of the title = 1.2, 
@@ -155,7 +158,7 @@ levels(as.factor(gss_lon$year))
 yrs <- c(seq(1972, 1988, 4), 1993, seq(1996, 2016, 4))
 
 mean_age <- gss_lon %>%
-    filter(age %nin% NA && year %in% yrs) %>%
+    filter(age %nin% NA & year %in% yrs) %>%
     group_by(year) %>%
     summarize(xbar = round(mean(age, na.rm = TRUE), 0))
 # Create a new column, all values equal to 0.3 to place mean age on plots 
@@ -168,6 +171,7 @@ yr_labs <- data.frame(x = 85, y = 0.8,
 # Define environment only for specified years and age in the x axis
 p <- ggplot(data = subset(gss_lon, year %in% yrs),
             mapping = aes(x = age))
+p + geom_density()
 # Use Geom_density to draw age distribution for each year
 # Vertical lines to show the mean age for each year 
 # The mean values are depicted about the white line 
@@ -245,14 +249,14 @@ p1 <- p + geom_line() + theme(legend.position = "top") +
     labs(x = "Date",
          y = "Index",
          color = "Series")
-
+p1
 p <- ggplot(data = fredts,
             mapping = aes(x = date, y = sp500_i - monbase_i))
 
 p2 <- p + geom_line() +
     labs(x = "Date",
          y = "Difference")
-
+p2
 cowplot::plot_grid(p1, p2, nrow = 2, rel_heights = c(0.75, 0.25), align = "v")
 
 
