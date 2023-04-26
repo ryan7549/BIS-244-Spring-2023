@@ -197,6 +197,7 @@ p3 + theme_map() + labs(fill = "Percent")
 
 # Two views of Trump vs Clinton share: a white midpoint, and a Purple America version.
 # d_point variable is the democrat party points 
+# If starting from here, get election, us_states, us_states_elec, and theme_map function
 
 p0 <- ggplot(data = us_states_elec,
              mapping = aes(x = long, y = lat, group = group, fill = d_points))
